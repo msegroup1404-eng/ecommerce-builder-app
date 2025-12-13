@@ -1,4 +1,4 @@
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -7,6 +7,13 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { plugins } from './plugins'
+import { Tenants } from './collections/tenants'
+import { Categories } from './collections/Categories'
+import { Pages } from './collections/Pages/Pages'
+import { Templates } from './collections/templates'
+import { Products } from './collections/Products/Products'
+import { Collections } from './collections/Collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,17 +25,34 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [
+    Tenants,
+    // Orders,
+    Collections,
+    Categories,
+    Products,
+    Users,
+    Media,
+    Templates,
+    // Policies,
+    // GiftCards,
+    Pages,
+    // Payments,
+    // Locations,
+    // Shipping,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || '',
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI || '',
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    ...plugins
+  ],
 })

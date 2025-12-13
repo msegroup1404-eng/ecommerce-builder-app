@@ -1,8 +1,8 @@
 import type { TemplateSnapshot } from "./types";
 
 export const TEMPLATE_INDEX = {
-//   modern: () => import("./snapshots/modern.json") as Promise<{ default: TemplateSnapshot }>,
-//   minimal: () => import("./snapshots/minimal.json") as Promise<{ default: TemplateSnapshot }>,
+  modern: () => import("./modern/modern.json") as Promise<{ default: TemplateSnapshot }>,
+  // minimal: () => import("./snapshots/minimal.json") as Promise<{ default: TemplateSnapshot }>,
 //   fashion: () => import("./snapshots/fashion.json") as Promise<{ default: TemplateSnapshot }>
 } as const;
 

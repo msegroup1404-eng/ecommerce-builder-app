@@ -1,6 +1,6 @@
 // apps/cms/src/services/TemplateService.ts
 import { loadTemplatePackage } from '../lib/loadTemplatePackage'
-import { mergeSettingsIntoNode } from '@shared-utils/mergeTemplateSettings'
+// import { mergeSettingsIntoNode } from '@shared-utils/mergeTemplateSettings'
 
 /**
  * TemplateService handles:
@@ -47,7 +47,7 @@ export const TemplateService = {
     let settings = tenant.templateSettings || {}
 
     // merge tenant-level design settings
-    tree = mergeSettingsIntoNode(tree, settings)
+    // tree = mergeSettingsIntoNode(tree, settings)
 
     return tree
   },

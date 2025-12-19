@@ -26,6 +26,7 @@
     "@payloadcms/plugin-seo": "3.68.3",
     "@payloadcms/richtext-lexical": "3.68.3",
     "@payloadcms/ui": "3.68.3",
+    "@repo/shared-utils": "workspace:*",
     "@repo/ui": "workspace:*",
     "@shopnex/payload-sdk": "^3.1.7",
     "@shopnex/sidebar-plugin": "0.0.2",

@@ -1,5 +1,6 @@
 import { admins, anyone, isSuperAdmin } from '@/access/roles'
 import { CollectionConfig } from 'payload'
+import { afterChange } from './hooks/afterChange'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -50,5 +51,11 @@ export const Pages: CollectionConfig = {
         },
       },
     },
+    // computed fields
+    { name: 'mergedSnapshot', type: 'json', admin: { readOnly: true } },
+    { name: 'pageHash', type: 'text', admin: { readOnly: true } },
   ],
+  hooks: {
+    afterChange: [ afterChange ]
+  }
 }

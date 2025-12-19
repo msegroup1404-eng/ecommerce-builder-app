@@ -6,7 +6,11 @@
     "esModuleInterop": true,
     "incremental": false,
     "isolatedModules": true,
-    "lib": ["es2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "es2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "nodenext",
     "moduleDetection": "force",
     "moduleResolution": "nodenext",
@@ -14,6 +18,10 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
   }
 }

@@ -16,6 +16,7 @@
     "debug:storybook": "NODE_OPTIONS='--inspect' pnpm --filter=storybook dev"
   },
   "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "sherif": "^1.9.0",

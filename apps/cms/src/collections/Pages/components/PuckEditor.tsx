@@ -1,12 +1,12 @@
 'use client'
 
-import { Puck } from '@measured/puck'
+import { Config, Puck } from '@measured/puck'
 import { useField, useForm, useTheme } from '@payloadcms/ui'
 import '@measured/puck/puck.css'
 import './PuckEditor.scss'
 import './dark-mode.css'
 import { useEffect, useState } from 'react'
-import { TemplateService } from '@/lib/templateService'
+import { TemplateService } from '@/lib/templates/templateService'
 import { JSONFieldServerProps } from 'payload'
 import { getCollectionIDType } from '@/utils/getCollectionIDType'
 import { getTenantFromCookie } from '@payloadcms/plugin-multi-tenant/utilities'
@@ -29,7 +29,7 @@ const PuckEditor: React.FC<any> = ({
   const { value: handle, setValue: setHandle } = useField<any>({
     path: 'handle',
   })
-  const [config, setConfig] = useState({})
+  const [config, setConfig] = useState<Config>({ components: {} })
 
   // 2️⃣ load template package based on tenant.template + tenant.templateVersion
   useEffect(() => {

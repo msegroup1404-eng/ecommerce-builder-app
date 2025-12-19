@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"],
       "@repo/*": ["../*"],

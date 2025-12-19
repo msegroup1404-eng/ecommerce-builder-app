@@ -420,6 +420,16 @@ export interface Page {
     | number
     | boolean
     | null;
+  mergedSnapshot?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  pageHash?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -727,6 +737,8 @@ export interface PagesSelect<T extends boolean = true> {
   description?: T;
   handle?: T;
   snapshot?: T;
+  mergedSnapshot?: T;
+  pageHash?: T;
   updatedAt?: T;
   createdAt?: T;
 }

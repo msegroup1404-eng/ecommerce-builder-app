@@ -1,9 +1,22 @@
-import type { TemplateSnapshot } from "./types";
-
 export const TEMPLATE_INDEX = {
-  modern: () => import("./modern/modern.json") as Promise<{ default: TemplateSnapshot }>,
-  // minimal: () => import("./snapshots/minimal.json") as Promise<{ default: TemplateSnapshot }>,
-//   fashion: () => import("./snapshots/fashion.json") as Promise<{ default: TemplateSnapshot }>
+  simple: {
+    versions: {
+      //   v1: {
+      //     pages: {
+      //       home: () => import("./simple/v1/home.json"),
+      //       about: () => import("./simple/v1/about.json"),
+      //       contact: () => import("./simple/v1/contact.json"),
+      //       "products-list": () => import("./simple/v1/products-list.json"),
+      //       "products-detail": () => import("./simple/v1/products-detail.json"),
+      //     },
+      //     puckConfig: () => import("./simple/v1/puck-config"),
+      //     componentsMap: () => import("./simple/v1/componentsMap.lazy"),
+      //     componentAvailability: () => import("./simple/v1/componentAvailability"),
+      //   },
+      // },
+      v1: () => import("./simple/v1")
+    },
+  }
 } as const;
 
 export type TemplateID = keyof typeof TEMPLATE_INDEX;

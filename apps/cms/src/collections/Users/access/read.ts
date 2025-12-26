@@ -4,7 +4,7 @@ import { getTenantFromCookie } from '@payloadcms/plugin-multi-tenant/utilities'
 
 import { isAccessingSelf } from './isAccessingSelf'
 import { getUserTenantIDs } from '@/utils/getUserTanentIDs'
-import { isSuperAdmin } from '@/access/roles'
+import { isSuperAdmin, isSuperAdminAccess } from '@/access/roles'
 import { getCollectionIDType } from '@/utils/getCollectionIDType'
 
 export const readAccess: Access<User> = ({ req, id }) => {
@@ -16,7 +16,7 @@ export const readAccess: Access<User> = ({ req, id }) => {
     return true
   }
 
-  const superAdmin = isSuperAdmin({ req })
+  const superAdmin = isSuperAdminAccess({ req })
   const selectedTenant = getTenantFromCookie(
     req.headers,
     getCollectionIDType({ payload: req.payload, collectionSlug: 'tenants' }),

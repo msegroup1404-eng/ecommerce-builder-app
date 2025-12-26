@@ -1,12 +1,12 @@
 import type { CollectionConfig } from 'payload'
 
 import { updateAndDeleteAccess } from './access/updateAndDelete'
-import { isSuperAdmin } from '@/access/roles'
+import { isSuperAdmin, anyone } from '@/access/roles'
 
 export const Tenants: CollectionConfig = {
     slug: 'tenants',
     access: {
-        create: isSuperAdmin,
+        create: anyone,
         delete: updateAndDeleteAccess,
         read: ({ req }) => Boolean(req.user),
         update: updateAndDeleteAccess,
@@ -52,11 +52,5 @@ export const Tenants: CollectionConfig = {
         { name: 'templateVersion', type: 'text', required: false },
         { name: 'templateSettings', type: 'json', required: false },
         { name: 'onboardingCompleted', type: 'checkbox', defaultValue: false },
-        {
-            name: 'owner',
-            type: 'relationship',
-            relationTo: 'users',
-            required: true,
-        },
     ],
 }

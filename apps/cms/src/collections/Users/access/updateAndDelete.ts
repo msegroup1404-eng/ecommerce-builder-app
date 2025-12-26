@@ -1,7 +1,7 @@
 import type { Access } from 'payload'
 
 import { isAccessingSelf } from './isAccessingSelf'
-import { isSuperAdmin } from '@/access/roles'
+import { isSuperAdmin, isSuperAdminAccess } from '@/access/roles'
 import { getUserTenantIDs } from '@/utils/getUserTanentIDs'
 
 export const updateAndDeleteAccess: Access = ({ req, id }) => {
@@ -11,7 +11,7 @@ export const updateAndDeleteAccess: Access = ({ req, id }) => {
     return false
   }
 
-  if (isSuperAdmin({ req }) || isAccessingSelf({ user, id })) {
+  if (isSuperAdminAccess({ req }) || isAccessingSelf({ user, id })) {
     return true
   }
 

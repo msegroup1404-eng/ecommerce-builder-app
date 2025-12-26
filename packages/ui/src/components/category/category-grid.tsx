@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "#components/ui/card";
 
 interface CategoryGridProps {
     categories: { title: string; productCount: number }[];

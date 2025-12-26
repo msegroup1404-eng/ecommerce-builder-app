@@ -56,7 +56,7 @@ export async function fetchTenantPage(tenantSlug: string, path: string, preview?
     if (!page) return ({ error: 'Page not found' });
 
     // Use precomputed if available; else merge on-the-fly
-    let merged = page.mergedSnapshot ? JSON.parse(page.mergedSnapshot) : mergeTemplateWithPage(
+    let merged = page.mergedSnapshot ? JSON.parse(page.mergedSnapshot as string) : mergeTemplateWithPage(
       tenant.templateSettings || {},
       page.snapshot || {},
       {}

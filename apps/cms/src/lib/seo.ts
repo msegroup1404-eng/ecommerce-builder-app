@@ -79,7 +79,7 @@ export function generatePageMetadata({
 
   if (pageConfig) {
     // Handle title templates
-    if (pageConfig.titleTemplate && title) {
+    if (pageConfig. && title) {
       metaTitle = pageConfig.titleTemplate.replace('%s', title)
     } else if ('title' in pageConfig) {
       metaTitle = pageConfig.title

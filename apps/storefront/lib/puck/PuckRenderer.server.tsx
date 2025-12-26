@@ -1,11 +1,11 @@
 // src/lib/puck/renderer.tsx
-import React from 'react';
+import React from "react";
 
 // import { renderToStaticMarkup } from 'react-dom/server';
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from "sanitize-html";
 
-import { blockKey, getRedisJSON } from '../cache';
-import { requireComponent } from './componentRegistry.server';
+import { blockKey, getRedisJSON } from "@repo/shared-utils/redis";
+import { requireComponent } from "./componentRegistry.server";
 
 /**
  * This renderer expects a normalized `puckJson`:
@@ -37,6 +37,13 @@ export async function renderPuckToReactNodes(
   const blocks = puckJson?.components || puckJson?.blocks || [];
 
   async function renderNode(node: any, idx = 0): Promise<React.ReactNode> {
+    const metadata = {
+      env: "storefront",
+      tenantSlug,
+      pageHash,
+      isEditing: false,
+    }; // Context for resolveData
+
     if (!node) return null;
 
     if (pageHash) {
@@ -54,7 +61,7 @@ export async function renderPuckToReactNodes(
     }
 
     const Comp = await requireComponent(node.type);
-    const props = { ...(node.props || {}) };
+    const props = { ...(node.props || {}), metadata };
 
     if (props?.html) props.html = sanitizeHtml(props.html);
 
@@ -63,7 +70,11 @@ export async function renderPuckToReactNodes(
       children.map((c: any, i: number) => renderNode(c, i))
     );
 
-    const element = React.createElement(Comp, { key: node.id || idx, ...props }, renderedChildren);
+    const element = React.createElement(
+      Comp,
+      { key: node.id || idx, ...props },
+      renderedChildren
+    );
 
     // Optionally serialize element to HTML and store (requires renderToStaticMarkup)
     // Tradeoff: storing HTML reduces server CPU but prevents partial streaming and RSC boundaries. Use for heavy repeated blocks (product grids).
@@ -75,7 +86,9 @@ export async function renderPuckToReactNodes(
     return element;
   }
 
-  const rendered = await Promise.all(blocks.map((b: any, i: number) => renderNode(b, i)));
+  const rendered = await Promise.all(
+    blocks.map((b: any, i: number) => renderNode(b, i))
+  );
   return rendered;
 }
 
@@ -83,7 +96,7 @@ export async function renderPuckToReactNodes(
 export default async function PuckRenderer({
   puckJson,
   tenantSlug,
-  pageHash
+  pageHash,
 }: {
   puckJson: any;
   tenantSlug: string;

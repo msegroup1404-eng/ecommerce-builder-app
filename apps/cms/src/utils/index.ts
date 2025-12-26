@@ -4,7 +4,7 @@ export { rateLimitGuard } from "./rate-limit-guard";
 export { getClientIp } from "./get-client-ip";
 
 // Data Processing
-export { validateCartItems } from "./validate-cart-items";
+// export { validateCartItems } from "./validate-cart-items";
 export { isExpandedDoc } from "./is-expanded-doc";
 export { formatSlug } from "./format-slug";
 

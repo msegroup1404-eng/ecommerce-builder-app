@@ -6,7 +6,8 @@ import type { Access, AccessArgs } from 'payload'
 export const checkRole = (roles: User['roles'] = [], user?: null | User) =>
   !!user?.roles?.some((role) => roles?.includes(role))
 
-type isAdmin = (args: AccessArgs<User> | FieldAccessArgs<User>) => boolean
+type isAdminAccess = (args: AccessArgs<User> | FieldAccessArgs<User> ) => boolean
+type isAdmin = (args: User | null ) => boolean
 
 export const adminPluginAccess: Access = ({ req }) => {
   const shopHandle = req.headers.get('x-payload-sdk-token')
@@ -14,11 +15,15 @@ export const adminPluginAccess: Access = ({ req }) => {
   return admins({ req })
 }
 
-export const admins: isAdmin = ({ req: { user } }) => {
+export const admins: isAdminAccess = ({ req: { user } }) => {
   return checkRole(['admin'], user)
 }
 
-export const isSuperAdmin: isAdmin = ({ req: { user } }) => {
+export const isSuperAdminAccess: isAdminAccess = ({ req: { user } }) => {
+  return checkRole(['super-admin'], user)
+}
+
+export const isSuperAdmin: isAdmin = (user) => {
   return checkRole(['super-admin'], user)
 }
 

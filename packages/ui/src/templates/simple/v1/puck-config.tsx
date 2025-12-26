@@ -1,39 +1,20 @@
 import { Config } from '@measured/puck'
 import { PuckProps } from '../puck-types'
+import { ReactNode } from 'react'
 
-// Import blocks (complex sections/layouts)
-import {
-  HeaderBlock,
-  HeadingBlock,
-  HeroSection,
-  LandingHeroSection,
-  ProductGrid,
-  FeaturedProductsSection,
-  FeatureCard,
-  NewsletterSection,
-  FooterSection,
-} from '@/blocks'
-
-// Import components (simple reusable elements)
-import { TextBlock } from '@repo/ui/components/TextBlock'
-import { ButtonBlock } from '@repo/ui/components/ButtonBlock'
-import { Spacer } from '@repo/ui/components/Spacer'
-import { Logo } from '@repo/ui/components/Logo'
-import { StatItem } from '@repo/ui/components/StatItem'
-import { Badge } from '@repo/ui/components/Badge'
-import { AuthProvider } from '@/contexts/auth-context'
-
-export const config: Config<PuckProps> = {
+export const config: Config<any> = {
   root: {
     fields: {
       title: { type: 'text' },
       description: { type: 'textarea' },
       handle: { type: 'text' },
     },
-    render: ({ children }) => {
+    render: ({ children }: { children: ReactNode }) => {
       return (
         <div className="twp">
-          <AuthProvider>{children}</AuthProvider>
+          {/* <AuthProvider> */}
+            {children}
+            {/* </AuthProvider> */}
         </div>
       )
     },
@@ -59,23 +40,6 @@ export const config: Config<PuckProps> = {
     },
   },
   components: {
-    // Layout Blocks
-    HeaderBlock,
-    FooterSection,
-    HeroSection,
-    LandingHeroSection,
-    // Content Blocks
-    HeadingBlock,
-    NewsletterSection,
-    ProductGrid,
-    FeaturedProductsSection,
-    FeatureCard,
-    // Components
-    TextBlock,
-    ButtonBlock,
-    Logo,
-    StatItem,
-    Badge,
-    Spacer,
+
   },
 }

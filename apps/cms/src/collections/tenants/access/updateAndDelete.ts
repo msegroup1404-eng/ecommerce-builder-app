@@ -1,4 +1,4 @@
-import { isSuperAdmin } from '@/access/roles'
+import { isSuperAdmin, isSuperAdminAccess } from '@/access/roles'
 import { getUserTenantIDs } from '@/utils/getUserTanentIDs'
 import { Access } from 'payload'
 
@@ -7,7 +7,7 @@ export const updateAndDeleteAccess: Access = ({ req }) => {
     return false
   }
 
-  if (isSuperAdmin({ req })) {
+  if (isSuperAdminAccess({ req })) {
     return true
   }
 

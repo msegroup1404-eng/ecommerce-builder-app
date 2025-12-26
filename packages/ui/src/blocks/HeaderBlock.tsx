@@ -1,8 +1,8 @@
 import { ComponentConfig } from '@measured/puck'
 import Link from 'next/link'
-import { CartDrawer } from '@/components/cart/cart-drawer'
-import { SearchDialog } from '@/components/search/search-dialog'
-import { AccountMenu } from '@/components/account/account-menu'
+import { CartDrawer } from '#components/cart/cart-drawer'
+import { SearchDialog } from '#components/search/search-dialog'
+import { AccountMenu } from '#components/account/account-menu'
 
 export interface HeaderBlockProps {
   logoText: string

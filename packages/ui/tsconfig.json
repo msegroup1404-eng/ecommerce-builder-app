@@ -4,14 +4,31 @@
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "noEmit": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@repo/*": ["../*"],
-			"@repo/ui/*": ["./src/*"]
-
+      "@repo/ui/*": [
+        "./src/*"
+      ],
+      "#*": [
+        "./src/*"
+      ],
+      "#components/*": [
+        "./src/components/*"
+      ],
+      "#lib/*": [
+        "./src/lib/*"
+      ],
+      "#utils": [
+        "./src/utils/*"
+      ]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

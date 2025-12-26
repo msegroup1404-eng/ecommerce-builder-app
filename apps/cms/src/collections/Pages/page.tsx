@@ -2,13 +2,13 @@ import { headers as getHeaders } from 'next/headers.js'
 import PuckEditor from './components/PuckEditor'
 import { getTenantFromCookie } from '@payloadcms/plugin-multi-tenant/utilities'
 import { getCollectionIDType } from '@/utils/getCollectionIDType'
-import { getPayload } from 'payload'
+import { getPayload, TextFieldServerComponent } from 'payload'
 import React from 'react'
 import payloadConfig from '@/payload.config'
 import { notFound } from 'next/navigation'
-import type { Page } from '@/payload-types'
+import { getUserTenantIDs } from '@/utils/getUserTanentIDs'
 
-export default async function Page({ data }: { data: Page }) {
+const Page: TextFieldServerComponent = async ({ data, user }) => {
   const headers = await getHeaders()
   const payload = await getPayload({ config: payloadConfig })
 
@@ -16,6 +16,7 @@ export default async function Page({ data }: { data: Page }) {
     headers,
     getCollectionIDType({ collectionSlug: 'tenants', payload }),
   )
+
   if (!activeTenantID) {
     return notFound()
   }
@@ -23,6 +24,7 @@ export default async function Page({ data }: { data: Page }) {
     collection: 'tenants',
     id: activeTenantID,
   })
-
-  return <PuckEditor tenant={activeTenat} handle={ data.handle } />
+  return <PuckEditor tenant={activeTenat} handle={data.handle} />
 }
+
+export default Page

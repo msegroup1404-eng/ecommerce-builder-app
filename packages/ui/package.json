@@ -14,6 +14,12 @@
     "./templates/*": "./src/templates/*",
     "./utils/*": "./src/utils/*.ts"
   },
+  "imports": {
+    "#*": "./src/*",                  
+    "#components/*": "./src/components/*",
+    "#lib/*": "./src/lib/*",
+    "#utils": "./src/utils/*"
+  },
   "license": "MIT",
   "scripts": {
     "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css",

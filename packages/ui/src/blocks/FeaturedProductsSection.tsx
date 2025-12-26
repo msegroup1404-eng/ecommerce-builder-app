@@ -1,9 +1,9 @@
 import { ComponentConfig } from "@measured/puck";
-import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/product/product-card";
+import { Button } from "../components/ui/button";
+import { ProductCard } from "../components/product/product-card";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Product } from "@/lib/products";
+import { Product } from "#lib/products";
 
 export interface FeaturedProductsSectionProps {
     title?: string;

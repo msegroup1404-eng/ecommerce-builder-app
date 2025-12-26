@@ -1,4 +1,4 @@
-import { TemplateSnapshot } from '@/templates/types';
+import { TemplateSnapshot } from '#/templates/types';
 import deepmerge from 'deepmerge'
 
 // Optimized normalizer: minimal processing, assumes new slots model

@@ -1,5 +1,5 @@
 import { ComponentConfig } from "@measured/puck";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { createImageField } from "../utils/image-field";
 
 export interface FeatureCardProps {

@@ -167,43 +167,8 @@ export interface Tenant {
     | boolean
     | null;
   onboardingCompleted?: boolean | null;
-  owner: number | User;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  firstName?: string | null;
-  lastName?: string | null;
-  password?: string | null;
-  roles?: ('admin' | 'user' | 'super-admin')[] | null;
-  tenants?:
-    | {
-        tenant: number | Tenant;
-        roles: ('tenant-admin' | 'tenant-viewer')[];
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -211,6 +176,7 @@ export interface User {
  */
 export interface Collection {
   id: number;
+  tenant?: (number | null) | Tenant;
   title: string;
   description?: string | null;
   /**
@@ -244,6 +210,7 @@ export interface Collection {
  */
 export interface Media {
   id: number;
+  tenant?: (number | null) | Tenant;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -263,6 +230,7 @@ export interface Media {
  */
 export interface Product {
   id: number;
+  tenant?: (number | null) | Tenant;
   pid?: string | null;
   title: string;
   currency?: string | null;
@@ -335,6 +303,7 @@ export interface Product {
  */
 export interface Category {
   id: number;
+  tenant?: (number | null) | Tenant;
   title: string;
   description?: string | null;
   /**
@@ -370,6 +339,41 @@ export interface Category {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  firstName?: string | null;
+  lastName?: string | null;
+  password?: string | null;
+  username?: string | null;
+  roles?: ('admin' | 'user' | 'super-admin')[] | null;
+  tenants?:
+    | {
+        tenant: number | Tenant;
+        roles: ('tenant-admin' | 'tenant-viewer')[];
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -545,7 +549,6 @@ export interface TenantsSelect<T extends boolean = true> {
   templateVersion?: T;
   templateSettings?: T;
   onboardingCompleted?: T;
-  owner?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -554,6 +557,7 @@ export interface TenantsSelect<T extends boolean = true> {
  * via the `definition` "collections_select".
  */
 export interface CollectionsSelect<T extends boolean = true> {
+  tenant?: T;
   title?: T;
   description?: T;
   image?: T;
@@ -575,6 +579,7 @@ export interface CollectionsSelect<T extends boolean = true> {
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
+  tenant?: T;
   title?: T;
   description?: T;
   image?: T;
@@ -605,6 +610,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
+  tenant?: T;
   pid?: T;
   title?: T;
   currency?: T;
@@ -671,6 +677,7 @@ export interface UsersSelect<T extends boolean = true> {
   firstName?: T;
   lastName?: T;
   password?: T;
+  username?: T;
   roles?: T;
   tenants?:
     | T
@@ -701,6 +708,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
+  tenant?: T;
   alt?: T;
   updatedAt?: T;
   createdAt?: T;

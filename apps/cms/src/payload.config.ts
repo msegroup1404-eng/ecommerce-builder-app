@@ -14,6 +14,7 @@ import { Pages } from './collections/Pages/Pages'
 import { Templates } from './collections/templates'
 import { Products } from './collections/Products/Products'
 import { Collections } from './collections/Collections'
+import { seed } from './seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,6 +52,11 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
+  // onInit: async (args) => {
+  //   if (process.env.SEED_DB) {
+  //     await seed(args)
+  //   }
+  // },
   sharp,
   plugins: [
     ...plugins

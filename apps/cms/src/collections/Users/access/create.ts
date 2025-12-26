@@ -1,4 +1,4 @@
-import { isSuperAdmin } from '@/access/roles'
+import { isSuperAdmin, isSuperAdminAccess } from '@/access/roles'
 import { Tenant, User } from '@/payload-types'
 import { getUserTenantIDs } from '@/utils/getUserTanentIDs'
 import type { Access } from 'payload'
@@ -8,11 +8,11 @@ export const createAccess: Access<User> = ({ req }) => {
         return false
     }
 
-    if (isSuperAdmin({ req })) {
+    if (isSuperAdminAccess({ req })) {
         return true
     }
 
-    if (!isSuperAdmin({ req }) && req.data?.roles?.includes('super-admin')) {
+    if (!isSuperAdminAccess({ req }) && req.data?.roles?.includes('super-admin')) {
         return false
     }
 

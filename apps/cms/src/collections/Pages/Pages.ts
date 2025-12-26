@@ -1,6 +1,7 @@
-import { admins, anyone, isSuperAdmin } from '@/access/roles'
+import { anyone, isSuperAdminAccess } from '@/access/roles'
 import { CollectionConfig } from 'payload'
 import { afterChange } from './hooks/afterChange'
+import { superAdminOrTenantAdminAccess } from './access/superAdminOrTenantAdmin'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -11,9 +12,9 @@ export const Pages: CollectionConfig = {
   },
   access: {
     read: anyone,
-    create: admins,
-    update: admins,
-    delete: admins,
+    create: superAdminOrTenantAdminAccess,
+    update: superAdminOrTenantAdminAccess,
+    delete: superAdminOrTenantAdminAccess,
   },
   fields: [
     {
@@ -35,7 +36,7 @@ export const Pages: CollectionConfig = {
           required: true,
           defaultValue: 'new-page',
           access: {
-            update: isSuperAdmin,
+            update: isSuperAdminAccess,
           },
         },
       ],
@@ -47,7 +48,7 @@ export const Pages: CollectionConfig = {
       required: true,
       admin: {
         components: {
-          Field: '@/collections/Pages/components/PuckEditor',
+          Field: '@/collections/Pages/page',
         },
       },
     },

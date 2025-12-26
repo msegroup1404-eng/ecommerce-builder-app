@@ -1,6 +1,6 @@
 import { ComponentConfig } from "@measured/puck";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "#components/ui/button";
+import { Input } from "#components/ui/input";
 import { Mail } from "lucide-react";
 
 export interface NewsletterSectionProps {

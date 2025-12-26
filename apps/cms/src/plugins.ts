@@ -3,7 +3,7 @@ import type { Plugin } from 'payload'
 // import { cjPlugin } from '@shopnex/cj-plugin'
 // import { importExportPlugin } from '@shopnex/import-export-plugin'
 // import { stripePlugin } from '@shopnex/stripe-plugin'
-import { admins, isSuperAdmin } from './access/roles'
+import { admins, isSuperAdmin, isSuperAdminAccess } from './access/roles'
 // import { quickActionsPlugin } from '@shopnex/quick-actions-plugin'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 // import { analyticsPlugin } from '@shopnex/analytics-plugin'
@@ -22,12 +22,16 @@ export const plugins: Plugin[] = [
   multiTenantPlugin<Config>({
     collections: {
       pages: {},
+      products: {},
+      categories: {},
+      collections: {},
+      media: {}
     },
     tenantField: {
       access: {
         read: () => true,
         update: ({ req }) => {
-          if (isSuperAdmin({ req })) {
+          if (isSuperAdminAccess({ req })) {
             return true
           }
           return getUserTenantIDs(req.user).length > 0

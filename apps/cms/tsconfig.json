@@ -17,6 +17,7 @@
       ]
     },
     "target": "ES2022",
+    "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",
@@ -26,5 +27,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }

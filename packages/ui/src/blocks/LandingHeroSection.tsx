@@ -1,5 +1,5 @@
 import { ComponentConfig } from "@measured/puck";
-import { Button } from "@/components/ui/button";
+import { Button } from "#components/ui/button";
 import Link from "next/link";
 import { ShoppingBag, ArrowRight, Eye, Download, Play } from "lucide-react";
 import { StatItemComponent } from "../components/StatItem";

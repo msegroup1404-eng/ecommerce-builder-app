@@ -1,10 +1,11 @@
 import type { CollectionConfig } from "payload";
 
-import { admins, adminsOrSelf, anyone, isSuperAdmin } from "@/access/roles";
+import { admins, adminsOrSelf, anyone, isSuperAdmin, isSuperAdminAccess } from "@/access/roles";
 
 import { groups } from "../groups";
 import { tenantsArrayField } from '@payloadcms/plugin-multi-tenant/fields'
 import { setCookieBasedOnDomain } from "./hooks/setCookieBasedOnDomain";
+import { ensureUniqueUsername } from "./hooks/ensureUniqueUsername";
 
 const defaultTenantArrayField = tenantsArrayField({
     tenantsArrayFieldName: 'tenants',
@@ -27,7 +28,7 @@ const defaultTenantArrayField = tenantsArrayField({
                         return false
                     }
 
-                    if (isSuperAdmin({ req })) {
+                    if (isSuperAdminAccess({ req })) {
                         return true
                     }
 
@@ -47,7 +48,6 @@ export const Users: CollectionConfig = {
         update: admins,
     },
     admin: {
-        group: groups.customers,
         useAsTitle: "email",
     },
 
@@ -81,9 +81,17 @@ export const Users: CollectionConfig = {
                         return true
                     }
 
-                    return isSuperAdmin({ req })
+                    return isSuperAdminAccess({ req })
                 },
             },
+        },
+        {
+            name: 'username',
+            type: 'text',
+            hooks: {
+                beforeValidate: [ensureUniqueUsername],
+            },
+            index: true,
         },
         {
             name: "roles",
@@ -124,7 +132,7 @@ export const Users: CollectionConfig = {
             },
         },
     ],
-      hooks: {
-    afterLogin: [setCookieBasedOnDomain],
-  },
+    hooks: {
+        afterLogin: [setCookieBasedOnDomain],
+    },
 };

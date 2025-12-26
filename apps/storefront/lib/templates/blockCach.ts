@@ -1,5 +1,5 @@
 // lib/blockCache.ts
-import { getRedisJSON, setRedisJSON } from '../cache'
+import { getRedisJSON, setRedisJSON } from '@repo/shared-utils/redis'
 
 /**
  * blockHtml caching is optional but powerful:

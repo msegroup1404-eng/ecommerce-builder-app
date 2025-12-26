@@ -1,5 +1,5 @@
 import { ComponentConfig } from "@measured/puck";
-import { Button } from "@/components/ui/button";
+import { Button } from "#components/ui/button";
 import { StatItemComponent } from "../components/StatItem";
 import { BadgeComponent } from "../components/Badge";
 import { ImagePickerField } from "../components/ImagePickerField";

@@ -66,6 +66,7 @@ const PuckEditor: React.FC<any> = ({
       <Puck
         config={config}
         data={value || initialData}
+        metadata={{ env: 'cms', tenantSlug: tenant.slug, isEditing: true }}
         onPublish={save}
         onChange={onChange}
         overrides={{
